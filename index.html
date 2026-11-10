@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=11">
+<link rel="stylesheet" href="css/styles.css?v=12">
 </head>
 <body>
 <div id="app">
@@ -54,7 +54,7 @@
         <div>
           <div class="stats">
             <div><b>5</b><span>crops to grow</span></div>
-            <div><b>4</b><span>kinds of animals</span></div>
+            <div><b>5</b><span>kinds of animals</span></div>
             <div><b>36</b><span>real farm facts</span></div>
           </div>
           <article class="card">
@@ -75,7 +75,7 @@
         </article>
         <article class="card">
           <h3>Results</h3>
-          <p>A playable Quest 3 farm: till, plant, water, and harvest carrots, tomatoes, and corn by hand, with a day/night clock, a voiced merchant NPC, and animals to pet and call home.</p>
+          <p>A playable Quest 3 farm: till, plant, water, and harvest carrots, tomatoes, and corn by hand, milk dairy cows to a steady rhythm, with a day/night clock, a voiced merchant NPC, and animals to pet and call home.</p>
         </article>
       </div>
     </div></div>
@@ -104,6 +104,7 @@
         <li><b>Look for hints.</b> Look at a tool, the bell or the merchant's booth and a short hint appears.</li>
         <li><b>Tools find their way home.</b> Drop a tool and it returns to the tool rack.</li>
         <li><b>Rest the soil.</b> Planting the same crop again and again wears the soil out.</li>
+        <li><b>Milk in rhythm.</b> Look at a cow and press A to sit beside her in the barn. Squeeze Grip and pull down on a teat as the ring lands on the circle. She can be milked again 12 in-game hours later, just like on a real dairy farm.</li>
         <li><b>End the day early.</b> Ring the farm bell. Once every animal is in the barn, the farm skips to morning.</li>
       </ul>
     </div></div>
@@ -151,67 +152,28 @@
     <div class="scroll"><div class="wrap">
       <div class="page-head"><a class="back" href="#/">Back</a></div>
       <h2 class="banner"><img src="" data-icon="coop" alt="">Behind the build</h2>
-      <p class="lead">How Evergarden was made, and where it's going next.</p>
+      <p class="lead">How Evergarden was made.</p>
       <article class="card abstract">
         <h3>Abstract</h3>
         <div id="abstractText"></div>
         <ul class="keywords" id="keywords" aria-label="Keywords"></ul>
       </article>
-      <div class="cols">
-        <article class="card tilt-r">
-          <h3>Methods</h3>
-          <dl class="specs">
-            <div><dt>Planning</dt><dd>Planned features and timeline in a Game Design Doc (GDD)</dd></div>
-            <div><dt>Engine</dt><dd>Built in Unity 2022.3 LTS with C#</dd></div>
-            <div><dt>Headset</dt><dd>Targeted Meta Quest 3 for immersive play</dd></div>
-            <div><dt>Assets</dt><dd>3D models from the Unity Asset Store; audio edited in Audacity</dd></div>
-            <div><dt>Reviews</dt><dd>Bi-weekly mentor reviews guided each iteration</dd></div>
-          </dl>
-        </article>
-        <article class="card">
-          <h3>Development process</h3>
-          <p>Each farm tile moves through five states. Each watered day grows the crop; harvesting returns the tile to Tilled.</p>
-          <ol class="states" aria-label="Tile states">
-            <li>Grass</li><li>Tilled</li><li>Planted</li><li>Watered</li><li class="end">Harvest</li>
-          </ol>
-          <pre class="code"><code>void OnCollisionEnter(Collision c) {
-  if (c.gameObject.CompareTag("Hoe"))
-    SetState(TileState.Tilled);
-}
-void OnParticleCollision(GameObject p) {
-  if (p.CompareTag("Water"))
-    SetState(TileState.Watered);
-}</code></pre>
-          <h4>Milestones</h4>
-          <dl class="milestones">
-            <div><dt>Jan</dt><dd>Project start</dd></div>
-            <div><dt>Feb</dt><dd>Farmland status</dd></div>
-            <div><dt>Apr</dt><dd>Crops grow</dd></div>
-            <div><dt>Aug</dt><dd>Merchant NPC</dd></div>
-            <div><dt>Oct</dt><dd>Animal behaviors</dd></div>
-          </dl>
-        </article>
-      </div>
-      <div class="cols">
-        <article class="card">
-          <h3>Reflection</h3>
-          <ul class="list">
-            <li>Blended computer science, game design, and education</li>
-            <li>Learned to design gesture-based VR interactions in Unity</li>
-            <li>Progress report meetings with my mentor for feedback and suggestions</li>
-          </ul>
-        </article>
-        <article class="card tilt-r">
-          <h3>Conclusions</h3>
-          <p>Evergarden shows that VR's physical interaction can make farming a calm, hands-on experience and a starting point for teaching K–12 students where food comes from.</p>
-        </article>
-      </div>
-      <h3 class="sub">Future directions</h3>
-      <div class="cols three">
-        <article class="card"><h4>Friends and quests</h4><p>More NPCs with friendships and quests.</p></article>
-        <article class="card"><h4>Weather</h4><p>Weather that changes the scenery and triggers events.</p></article>
-        <article class="card"><h4>Festivals</h4><p>In-game festivals and an event calendar for different in-game days.</p></article>
-      </div>
+      <article class="card">
+        <h3>Development process</h3>
+        <p>Each farm tile moves through five states. Each watered day grows the crop; harvesting returns the tile to Tilled.</p>
+        <ol class="states" aria-label="Tile states">
+          <li>Grass</li><li>Tilled</li><li>Planted</li><li>Watered</li><li class="end">Harvest</li>
+        </ol>
+        <h4>Milestones</h4>
+        <dl class="milestones">
+          <div><dt>Jan</dt><dd>Project start</dd></div>
+          <div><dt>Feb</dt><dd>Farmland status</dd></div>
+          <div><dt>Apr</dt><dd>Crops grow</dd></div>
+          <div><dt>Aug</dt><dd>Merchant NPC</dd></div>
+          <div><dt>Oct</dt><dd>Animal behaviors</dd></div>
+          <div><dt>Nov</dt><dd>Dairy cows and milking</dd></div>
+        </dl>
+      </article>
       <article class="card">
         <h3>Acknowledgments</h3>
         <p>Thank you to the Department of Computer Science and the University Honors Program at Cal State Fullerton, and to my mentor Dr. Duy Ho for bi-weekly advising and helpful suggestions.</p>
@@ -267,8 +229,8 @@ void OnParticleCollision(GameObject p) {
   </div>
 </div>
 
-<script src="js/data.js?v=11"></script>
-<script src="js/transitions.js?v=11"></script>
-<script src="js/app.js?v=11"></script>
+<script src="js/data.js?v=12"></script>
+<script src="js/transitions.js?v=12"></script>
+<script src="js/app.js?v=12"></script>
 </body>
 </html>

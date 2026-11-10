@@ -102,7 +102,7 @@ const STEPS = [
   ["Water", "tutorial", "Tilt the <b>watering can</b> to pour. Every watered day, your crops grow a stage."],
   ["Harvest", "farm-dusk", "Pluck ripe <b>tomatoes and corn</b> one at a time, with a soft buzz in your hand for each."],
   ["Trade", "merchant-shop", "Sell your harvest to the <b>merchant</b> for gold, then buy seeds for tomorrow."],
-  ["Animals", "barn-night", "Pet the <b>chickens, goats, sheep and horses</b>, collect eggs, and ring the <b>bell</b> to call everyone home."],
+  ["Animals", "barn-night", "Pet the <b>chickens, goats, sheep, horses and cows</b>, collect eggs, milk the cows by hand in the barn, and ring the <b>bell</b> to call everyone home."],
 ];
 
 // What each Quest 3 controller button does
@@ -112,14 +112,14 @@ const HANDS = [
     ["X", "Show crop status on each plot"],
     ["Y", "Open your backpack"],
     ["Menu", "Pause and change the volume"],
-    ["Grip", "Hold to grab"],
+    ["Grip", "Hold to grab, squeeze and pull to milk"],
   ] },
   { hand: "Right hand", keys: [
     ["Stick", "Turn to look around"],
-    ["A", "Pick a ripe crop, talk, collect eggs"],
-    ["B", "Next page of an info window"],
+    ["A", "Pick a ripe crop, talk, collect eggs, milk a cow"],
+    ["B", "Next page of an info window, stand up after milking"],
     ["Trigger", "Grab from a distance, press menu buttons"],
-    ["Grip", "Hold to grab tools, fruit and the bell rope"],
+    ["Grip", "Hold to grab tools, fruit and the bell rope, squeeze and pull to milk"],
   ] },
 ];
 
