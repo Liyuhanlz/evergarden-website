@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Evergarden</title>
+<meta name="description" content="Evergarden is a cozy VR farming game for Meta Quest 3 by Liyuhan Zhou, Cal State Fullerton Computer Science.">
+<meta name="theme-color" content="#E3F4FB">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- Home: the Persona-style menu -->
+  <section class="screen sky" data-route="home" aria-label="Home">
+    <div class="scroll">
+      <div class="clouds" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="wrap home-grid">
+        <div class="home-main">
+          <header class="home-head">
+            <h1 class="title" id="title">Evergarden</h1>
+            <p class="tagline">A cozy VR farm for Meta Quest 3</p>
+          </header>
+          <nav class="menu" id="menu" aria-label="Pages"></nav>
+          <p class="home-foot">by Liyuhan Zhou · CSUF ECS Showcase</p>
+        </div>
+        <!-- Only shown on wide screens -->
+        <div class="home-art" aria-hidden="true">
+          <figure class="polaroid"><img src="assets/screens/farm-dusk.jpg" alt=""></figure>
+          <img class="float f1" src="assets/art/icons/cow.png" alt="">
+          <img class="float f2" src="assets/art/icons/chicken.png" alt="">
+          <img class="float f3" src="assets/art/icons/tomato.png" alt="">
+          <img class="float f4" src="assets/art/icons/sheep.png" alt="">
+          <img class="float f5" src="assets/art/icons/watering-can.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="grass" aria-hidden="true"></div>
+  </section>
+
+  <!-- The game -->
+  <section class="screen meadow" data-route="game" aria-label="The game" hidden>
+    <div class="scroll"><div class="wrap">
+      <div class="page-head"><a class="back" href="#/">Back</a></div>
+      <h2 class="banner"><img src="" data-icon="sprout" alt="">The game</h2>
+      <p class="lead">A calm farm you build with your own hands.</p>
+      <div class="split">
+        <figure class="shot tilt-l"><img src="assets/screens/corn-dusk.jpg" alt="Corn ready to pick on the farm at dusk" loading="lazy"></figure>
+        <div>
+          <div class="stats">
+            <div><b>5</b><span>crops to grow</span></div>
+            <div><b>4</b><span>kinds of animals</span></div>
+            <div><b>36</b><span>real farm facts</span></div>
+          </div>
+          <article class="card">
+            <h3>Why I made it</h3>
+            <p>Many farming games are full of machinery and busy schedules. Evergarden is the opposite: a peaceful place where you build a garden from scratch and feel the small wins along the way. It draws on games like Stardew Valley and Minecraft.</p>
+          </article>
+        </div>
+      </div>
+      <div class="cols">
+        <article class="card tilt-r">
+          <h3>The goal</h3>
+          <p>Let players act out the gestures of starting their own farm, as a short, meaningful break in a rural world with simple controls and a relaxing atmosphere.</p>
+        </article>
+        <article class="card">
+          <h3>Who it's for</h3>
+          <p>Younger learners, including K–12 students, and anyone who has never farmed before. Along the way it offers light exercise and real facts about how food grows.</p>
+        </article>
+      </div>
+    </div></div>
+    <div class="grass" aria-hidden="true"></div>
+  </section>
+
+  <!-- How it plays -->
+  <section class="screen sky" data-route="play" aria-label="How it plays" hidden>
+    <div class="scroll"><div class="wrap">
+      <div class="page-head"><a class="back" href="#/">Back</a></div>
+      <h2 class="banner"><img src="" data-icon="wateringCan" alt="">How it plays</h2>
+      <p class="lead">Every action is a real gesture. No menus to memorize.</p>
+      <div class="split">
+        <div>
+          <div class="steps" role="tablist" aria-label="Farming steps" id="steps"></div>
+          <p class="step-text" id="stepText" aria-live="polite"></p>
+        </div>
+        <figure class="shot tilt-r"><img id="stepImg" src="assets/screens/farm-day.jpg" alt=""></figure>
+      </div>
+
+      <h3 class="sub">Controls</h3>
+      <div class="hands cols" id="hands"></div>
+
+      <h3 class="sub">Good to know</h3>
+      <ul class="tips">
+        <li><b>Look for hints.</b> Look at a tool, the bell or the merchant's booth and a short hint appears.</li>
+        <li><b>Tools find their way home.</b> Drop a tool and it returns to the tool rack.</li>
+        <li><b>Rest the soil.</b> Planting the same crop again and again wears the soil out.</li>
+        <li><b>End the day early.</b> Ring the farm bell. Once every animal is in the barn, the farm skips to morning.</li>
+      </ul>
+    </div></div>
+    <div class="grass" aria-hidden="true"></div>
+  </section>
+
+  <!-- Fun facts -->
+  <section class="screen sky" data-route="facts" aria-label="Fun facts" hidden>
+    <div class="scroll"><div class="wrap narrow">
+      <div class="page-head"><a class="back" href="#/">Back</a></div>
+      <h2 class="banner"><img src="" data-icon="corn" alt="">Fun facts</h2>
+      <p class="lead">In the game, hold the magnifying glass up to a crop to learn about it. Try it here.</p>
+      <div class="chips" role="tablist" aria-label="Crops" id="chips"></div>
+      <article class="card fact" id="fact" aria-live="polite">
+        <img class="fact-icon" id="fIcon" src="assets/art/icons/tomato.png" alt="">
+        <h3 id="fName">Tomato</h3>
+        <p id="fAbout"></p>
+        <dl class="compare">
+          <div><dt>On a real farm</dt><dd id="fReal"></dd></div>
+          <div><dt>In Evergarden</dt><dd id="fGame"></dd></div>
+        </dl>
+        <p class="fact-extra"><span class="tag">Did you know?</span> <span id="fFact"></span></p>
+        <div class="row">
+          <button class="pill" id="nextFact" type="button">Another fact</button>
+          <button class="pill ghost" id="listen" type="button" aria-pressed="false">Listen</button>
+        </div>
+      </article>
+      <p class="fine">Facts from Encyclopaedia Britannica. Harvest times from University of Minnesota Extension.</p>
+    </div></div>
+    <div class="grass" aria-hidden="true"></div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="screen sky" data-route="gallery" aria-label="Gallery" hidden>
+    <div class="scroll"><div class="wrap">
+      <div class="page-head"><a class="back" href="#/">Back</a></div>
+      <h2 class="banner"><img src="" data-icon="barn" alt="">Gallery</h2>
+      <p class="lead">Around the farm, day and night. Tap a picture to see it bigger.</p>
+      <div class="gallery" id="gallery"></div>
+    </div></div>
+    <div class="grass" aria-hidden="true"></div>
+  </section>
+
+  <!-- Behind the build -->
+  <section class="screen sky" data-route="build" aria-label="Behind the build" hidden>
+    <div class="scroll"><div class="wrap">
+      <div class="page-head"><a class="back" href="#/">Back</a></div>
+      <h2 class="banner"><img src="" data-icon="coop" alt="">Behind the build</h2>
+      <p class="lead">How Evergarden was made, and where it's going next.</p>
+      <article class="card abstract">
+        <h3>Abstract</h3>
+        <div id="abstractText"></div>
+        <ul class="keywords" id="keywords" aria-label="Keywords"></ul>
+      </article>
+      <div class="cols">
+        <article class="card tilt-r">
+          <h3>How it's made</h3>
+          <dl class="specs">
+            <div><dt>Headset</dt><dd>Meta Quest 3</dd></div>
+            <div><dt>Engine</dt><dd>Unity 2022.3 LTS, written in C#</dd></div>
+            <div><dt>Interaction</dt><dd>XR Interaction Toolkit: grab, pour, pluck and pet</dd></div>
+            <div><dt>Planning</dt><dd>Started from a game design document to shape ideas and the timeline</dd></div>
+            <div><dt>Testing</dt><dd>Weekly mentor reviews and progress reports</dd></div>
+            <div><dt>Assets</dt><dd>3D models from the Unity Asset Store, audio edited in Audacity</dd></div>
+          </dl>
+        </article>
+        <div>
+          <article class="card">
+            <h3>What I found</h3>
+            <p>VR can offer a real break from fast-paced life. By focusing on comfort and simple, physical interactions, Evergarden lets people try a lifestyle very different from their own and build a calm personal space.</p>
+          </article>
+          <article class="card tilt-r">
+            <h3>Thank you</h3>
+            <p>To the Department of Computer Science and the ECS Showcase organizers, and to my mentor Dr. Duy Ho for weekly advising and helpful suggestions.</p>
+          </article>
+        </div>
+      </div>
+      <h3 class="sub">What's next</h3>
+      <div class="cols three">
+        <article class="card"><h4>Neighbors</h4><p>Villagers to chat with and befriend over time.</p></article>
+        <article class="card"><h4>Weather</h4><p>Changing weather that transforms the scenery and sets off events.</p></article>
+        <article class="card"><h4>More to learn</h4><p>Tutorials, trivia and guides about farming.</p></article>
+      </div>
+    </div></div>
+    <div class="grass" aria-hidden="true"></div>
+  </section>
+
+  <!-- Meet the maker -->
+  <section class="screen sky" data-route="maker" aria-label="Meet the maker" hidden>
+    <div class="scroll"><div class="wrap">
+      <div class="page-head"><a class="back" href="#/">Back</a></div>
+      <h2 class="banner"><img src="" data-icon="cat" alt="">Meet the maker</h2>
+      <div class="split wide-left">
+        <article class="card maker">
+          <h3 id="makerName"></h3>
+          <p class="role" id="makerRole"></p>
+          <div class="row" id="makerLinks"></div>
+          <ul class="awards" id="makerAwards"></ul>
+          <p id="makerBio"></p>
+        </article>
+        <div>
+          <article class="card tilt-r">
+            <h3>Mentor</h3>
+            <p>Dr. Duy Ho<br>Department of Computer Science<br>Cal State Fullerton</p>
+          </article>
+          <p class="fine credits">Farm icons and cat illustration generated with ChatGPT (OpenAI). Screenshots are from the game.</p>
+        </div>
+      </div>
+    </div></div>
+    <div class="grass" aria-hidden="true"></div>
+  </section>
+
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot" hidden>
+  <button class="round" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <div class="lb-nav">
+    <button class="round" id="lbPrev" type="button" aria-label="Previous">&lsaquo;</button>
+    <button class="round" id="lbNext" type="button" aria-label="Next">&rsaquo;</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
