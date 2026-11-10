@@ -37,6 +37,7 @@ const ICONS = {
   barn: icon("barn"),
   coop: icon("chicken-coop"),
   cat: "assets/art/cat-hang.webp",
+  crate: icon("crate"),
 };
 
 // Menu order. `transition` names a function in transitions.js.
@@ -47,6 +48,52 @@ const PAGES = [
   { route: "gallery", label: "Gallery", icon: "barn", color: "#B9E28C", transition: "gentle" },
   { route: "build", label: "Behind the build", icon: "coop", color: "#FFD66B", transition: "gentle" },
   { route: "maker", label: "Meet the maker", icon: "cat", color: "#7CC46B", transition: "gentle" },
+  { route: "refs", label: "References", icon: "crate", color: "#FFF9EC", transition: "gentle" },
+];
+
+// APA 7 reference list, grouped for the References page. `html` may use <i>
+// for titles; the URL is shown and linked separately.
+const REFERENCES = [
+  { group: "Tutorials", items: [
+    { html: "Unity Unlocked. (2025, April 12). <i>How to make simple day/night cycle in Unity</i> [Video]. YouTube.", url: "https://www.youtube.com/watch?v=3M1W6cT98RM" },
+    { html: "Valem Tutorials. (n.d.). <i>Home</i> [YouTube channel]. YouTube. Retrieved November 10, 2026, from", url: "https://www.youtube.com/@ValemTutorials", note: "Where I started learning VR game development." },
+    { html: "Valem Tutorials. (2025, November 23). <i>How to make a VR game in Unity – Part 6: Ray and poke interactor</i> [Video]. YouTube.", url: "https://www.youtube.com/watch?v=rMaYhvgyi0U" },
+  ] },
+  { group: "3D models", items: [
+    { html: "JustCreate. (2023). <i>Low poly farm pack lite</i> [3D models]. Unity Asset Store. Used for the tomatoes, watering can, trees, and crates.", url: "https://assetstore.unity.com/packages/3d/environments/industrial/low-poly-farm-pack-lite-188100" },
+    { html: "Poly Ronin. (2025). <i>Low poly archaeological adventurer tools</i> [3D models]. Unity Asset Store. Used for the magnifying glass.", url: "https://assetstore.unity.com/packages/3d/props/tools/low-poly-archaeological-adventurer-tools-312995" },
+    { html: "Quaternius. (n.d.-a). <i>Ultimate animated animal pack</i> [3D models]. Used for the farm animals.", url: "https://quaternius.com/packs/ultimateanimatedanimals.html" },
+    { html: "Quaternius. (n.d.-b). <i>Ultimate animated character pack</i> [3D models]. Used for the NPCs.", url: "https://quaternius.com/packs/ultimatedanimatedcharacter.html" },
+    { html: "Quaternius. (n.d.-c). <i>Ultimate crops pack</i> [3D models]. Used for the tomato and corn crops.", url: "https://quaternius.com/packs/ultimatecrops.html" },
+    { html: "RetroStyle Games. (2026). <i>Low poly cow 3D model – Holstein dairy rigged animated HDRP</i> [3D model]. Unity Asset Store.", url: "https://assetstore.unity.com/packages/3d/characters/animals/mammals/low-poly-cow-3d-model-holstein-dairy-rigged-animated-hdrp-377614" },
+    { html: "synistersyrup. (n.d.). <i>Chicken coop</i> [3D model]. Sketchfab. Licensed under CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/).", url: "https://skfb.ly/6WLTL" },
+  ] },
+  { group: "Audio", items: [
+    { html: "Into the Ambience. (2023, June 2). <i>Relax on the farm – Nature relaxation video</i> [Video]. YouTube. Used for background sounds.", url: "https://www.youtube.com/watch?v=ziM6AXAlf80" },
+    { html: "Oh Happy Hen. (2023, June 26). <i>Volume up to hear some happy chicken sounds</i> [Video]. YouTube.", url: "https://www.youtube.com/shorts/dFZa2KZ4fG4" },
+    { html: "ProSounds. (2021, June 17). <i>Goat – Sound effect | ProSounds</i> [Video]. YouTube.", url: "https://www.youtube.com/watch?v=1r4ArWJugvY" },
+    { html: "Sounds of Nature. (2014, June 9). <i>Sheep sound</i> [Video]. YouTube.", url: "https://www.youtube.com/watch?v=x3c0JgZ59QQ" },
+  ] },
+  { group: "Farm facts", items: [
+    { html: "Encyclopaedia Britannica. (n.d.). Broccoli. In <i>Encyclopaedia Britannica</i>. Retrieved October 4, 2026, from", url: "https://www.britannica.com/plant/broccoli" },
+    { html: "Encyclopaedia Britannica. (n.d.). Carrot. In <i>Encyclopaedia Britannica</i>. Retrieved October 4, 2026, from", url: "https://www.britannica.com/plant/carrot" },
+    { html: "Encyclopaedia Britannica. (n.d.). Cattle. In <i>Britannica for Students</i>. Retrieved October 4, 2026, from", url: "https://kids.britannica.com/students/article/cattle/273566" },
+    { html: "Encyclopaedia Britannica. (n.d.). Cauliflower. In <i>Encyclopaedia Britannica</i>. Retrieved October 4, 2026, from", url: "https://www.britannica.com/plant/cauliflower" },
+    { html: "Encyclopaedia Britannica. (n.d.). Chicken. In <i>Encyclopaedia Britannica</i>. Retrieved October 4, 2026, from", url: "https://www.britannica.com/animal/chicken" },
+    { html: "Encyclopaedia Britannica. (n.d.). Corn. In <i>Encyclopaedia Britannica</i>. Retrieved October 4, 2026, from", url: "https://www.britannica.com/plant/corn-plant" },
+    { html: "Encyclopaedia Britannica. (n.d.). Dairy industry. In <i>Britannica for Students</i>. Retrieved October 4, 2026, from", url: "https://kids.britannica.com/students/article/dairy-industry/273899" },
+    { html: "Encyclopaedia Britannica. (n.d.). Goat. In <i>Britannica for Students</i>. Retrieved October 4, 2026, from", url: "https://kids.britannica.com/students/article/goat/274580" },
+    { html: "Encyclopaedia Britannica. (n.d.). Horse. In <i>Britannica for Students</i>. Retrieved October 4, 2026, from", url: "https://kids.britannica.com/students/article/horse/274947" },
+    { html: "Encyclopaedia Britannica. (n.d.). Sheep. In <i>Britannica for Students</i>. Retrieved October 4, 2026, from", url: "https://kids.britannica.com/students/article/sheep/277023" },
+    { html: "Encyclopaedia Britannica. (n.d.). Tomato. In <i>Encyclopaedia Britannica</i>. Retrieved October 4, 2026, from", url: "https://www.britannica.com/plant/tomato" },
+    { html: "Tong, C., Schuh, M., &amp; MacKenzie, J. (2024). <i>Growing tomatoes in home gardens</i>. University of Minnesota Extension.", url: "https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/growing-tomatoes" },
+    { html: "University of Minnesota Extension. (n.d.). <i>Crop and field planning tools for vegetable farmers</i>. Retrieved October 4, 2026, from", url: "https://extension.umn.edu/agriculture/specialty-crops/vegetable-farming/crop-and-field-planning-tools-for-vegetable-farmers" },
+    { html: "U.S. Department of Agriculture, Economic Research Service. (n.d.). <i>Dairy situation at a glance</i> [Data set].", url: "https://ers.usda.gov/sites/default/files/_laserfiche/DataFiles/48685/dairy-situation-glance.csv" },
+  ] },
+  { group: "AI tools", items: [
+    { html: "Anthropic. (2026). <i>Claude</i> (Opus 5.5) [Large language model]. Used through Claude Code to vibe code this website.", url: "https://claude.ai/" },
+    { html: "OpenAI. (2026). <i>ChatGPT</i> [Large language model]. Used to generate the in-game UI icons and the website icons.", url: "https://chatgpt.com/" },
+  ] },
 ];
 
 const STEPS = [
@@ -112,5 +159,5 @@ const SHOTS = [
   ["farmhouse-night", "The farmhouse at night"],
 ];
 
-return { MAKER, ABSTRACT, ICONS, PAGES, STEPS, HANDS, CROPS, SHOTS };
+return { MAKER, ABSTRACT, ICONS, PAGES, REFERENCES, STEPS, HANDS, CROPS, SHOTS };
 })();

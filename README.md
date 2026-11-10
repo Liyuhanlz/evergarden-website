@@ -58,7 +58,9 @@ Visitors who turn on "reduce motion" on their phone get a short fade instead.
 
 ## Credits
 
-- Farm icons (`assets/art/icons/`, 43 PNGs cut from one generated sheet) and cat illustration: generated with ChatGPT (OpenAI).
+- Website icons (`assets/art/icons/`, 43 PNGs cut from one generated sheet, and the hanging cat): generated with ChatGPT (OpenAI).
+- Website code: built with Claude (Anthropic) in Claude Code.
+- Full APA 7 reference list: the References page (`js/data.js`, `REFERENCES`).
 - Font: [Fredoka](https://fonts.google.com/specimen/Fredoka), SIL Open Font License.
 - Facts: Encyclopaedia Britannica and Britannica for Students. Harvest times: University of Minnesota Extension.
 - Screenshots: from the Evergarden game.

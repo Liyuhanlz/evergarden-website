@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 
-const { MAKER, ABSTRACT, ICONS, PAGES, STEPS, HANDS, CROPS, SHOTS } = window.EG;
+const { MAKER, ABSTRACT, ICONS, PAGES, REFERENCES, STEPS, HANDS, CROPS, SHOTS } = window.EG;
 const T = window.EG_TRANSITIONS;
 const $ = (s, root = document) => root.querySelector(s);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -16,9 +16,10 @@ function home() {
   title.innerHTML = [...title.textContent].map((c, i) =>
     `<span aria-hidden="true" style="color:${colors[i % 3]};transform:rotate(${i % 2 ? 6 : -5}deg) translateY(${i % 3 ? 2 : -2}px)">${c}</span>`).join("");
 
-  const offsets = [0, 22, 8, 30, 4, 18];
+  // Staggered left offsets; on phones the buttons also stretch to the right edge (see .mi in the CSS)
+  const offsets = [0, 22, 8, 30, 4, 18, 12];
   $("#menu").innerHTML = PAGES.map((p, i) =>
-    `<a class="mi" href="#/${p.route}" style="background:${p.color};margin-left:${offsets[i % offsets.length]}px;--tilt:${i % 2 ? 3 : -3}deg">
+    `<a class="mi" href="#/${p.route}" style="background:${p.color};--off:${offsets[i % offsets.length]}px;--tilt:${i % 2 ? 3 : -3}deg">
        <img src="${ICONS[p.icon]}" alt="">${p.label}</a>`).join("");
 
   document.querySelectorAll("img[data-icon]").forEach((img) => { img.src = ICONS[img.dataset.icon]; });
@@ -200,6 +201,13 @@ function maker() {
     : `<span class="pill todo">${l.label} (link coming soon)</span>`).join("");
 }
 
+// References: APA list, grouped, with hanging indents
+function refs() {
+  $("#refs").innerHTML = REFERENCES.map((g) =>
+    `<article class="card refs"><h3>${g.group}</h3><ul>${g.items.map((r) =>
+      `<li>${r.html} <a href="${r.url}" target="_blank" rel="noopener">${r.url}</a>${r.note ? `<span class="ref-note">${r.note}</span>` : ""}</li>`).join("")}</ul></article>`).join("");
+}
+
 // Behind the build: the project abstract
 function build() {
   $("#abstractText").innerHTML = ABSTRACT.text.map((p) => `<p>${p}</p>`).join("");
@@ -209,6 +217,7 @@ function build() {
 home();
 play();
 build();
+refs();
 facts();
 gallery();
 maker();

@@ -81,8 +81,9 @@ img { display: block; max-width: 100%; }
 .tagline { font-size: 15px; margin: 4px 0 8px 4px; color: var(--ink-soft); }
 .menu { position: relative; display: flex; flex-direction: column; }
 .mi {
-  display: flex; align-items: center; gap: 10px;
-  width: max-content; margin: 9px 0; padding: 9px 18px 9px 14px;
+  /* Phones: stretch across the screen, staggered, with the label centred */
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin: 9px calc(34px - var(--off, 0px)) 9px var(--off, 0px); padding: 10px 18px 10px 14px;
   font-size: 22px; font-weight: 700; color: var(--ink); text-decoration: none;
   clip-path: polygon(4% 0, 100% 6%, 96% 100%, 0 92%);
   transform: rotate(var(--tilt));
@@ -287,10 +288,10 @@ img { display: block; max-width: 100%; }
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center;
     min-height: calc(100vh - 190px); min-height: calc(100dvh - 190px);
   }
-  .title { font-size: 92px; }
+  .title { font-size: 84px; }
   .tagline { font-size: 22px; margin: 6px 0 14px 6px; }
-  .mi { font-size: 30px; padding: 12px 28px 12px 18px; margin: 12px 0; gap: 14px; }
-  .mi img { width: 50px; height: 50px; }
+  .mi { width: max-content; justify-content: flex-start; font-size: 28px; padding: 9px 26px 9px 18px; margin: 9px 0 9px var(--off, 0px); gap: 14px; }
+  .mi img { width: 46px; height: 46px; }
   .home-foot { font-size: 16px; margin-top: 24px; }
   .home-main { display: block; }
   .home-art { aspect-ratio: 1 / .9; margin: 0; }
@@ -404,3 +405,10 @@ img { display: block; max-width: 100%; }
   .states li { font-size: 16px; padding: 6px 14px; }
   .code { font-size: 13.5px; }
 }
+
+/* ---------- References ---------- */
+.refs ul { list-style: none; padding: 0; margin: 6px 0 0; }
+.refs li { padding-left: 2em; text-indent: -2em; margin: 10px 0; overflow-wrap: anywhere; }
+.refs a { color: var(--leaf-dark); }
+.ref-note { display: block; text-indent: 0; margin-top: 2px; font-size: .92em; color: var(--ink-soft); font-style: italic; }
+@media (min-width: 900px) { .refs li { font-size: 16px; } }
