@@ -7,7 +7,7 @@ window.EG = (() => {
 // ---------------------------------------------------------------------
 const MAKER = {
   name: "Liyuhan Zhou",
-  role: "Computer Science, Cal State Fullerton",
+  role: "B.S. Computer Science, Cal State Fullerton",
   bio: "Liyuhan Zhou is a Computer Science student at California State University, Fullerton, with an interest in game development. Her passion for computing began in high school, where she received a Senior Award from the Computer Science Department. After transferring from Santiago Canyon College, where she completed the Honors Program, she continued her studies at CSUF as an Honors student. Through her Senior Honors Project, she further explored game development, earning First Place at the Computer Science Annual Showcase and recognition as a finalist in the ECS Student Project Innovation Expo. She plans to pursue a career in game development and create innovative interactive experiences.",
   awards: [
     "First Place, Computer Science Annual Showcase",

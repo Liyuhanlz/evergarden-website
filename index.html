@@ -4,12 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Evergarden</title>
-<meta name="description" content="Evergarden is a cozy VR farming game for Meta Quest 3 by Liyuhan Zhou, Cal State Fullerton Computer Science.">
+<meta name="description" content="Evergarden: Growing Calm in a Virtual Reality Farm. A relaxing VR farming game for Meta Quest 3 by Liyuhan Zhou, B.S. Computer Science, Cal State Fullerton.">
+<meta property="og:title" content="Evergarden: Growing Calm in a Virtual Reality Farm">
+<meta property="og:description" content="A relaxing VR farming game for Meta Quest 3 by Liyuhan Zhou, Cal State Fullerton.">
+<meta property="og:image" content="https://liyuhanlz.github.io/evergarden-website/assets/screens/farm-dusk.jpg">
 <meta name="theme-color" content="#E3F4FB">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v=2">
 </head>
 <body>
 <div id="app">
@@ -22,12 +25,12 @@
         <div class="home-main">
           <header class="home-head">
             <h1 class="title" id="title">Evergarden</h1>
-            <p class="tagline">A cozy VR farm for Meta Quest 3</p>
+            <p class="tagline">Growing calm in a virtual reality farm</p>
           </header>
           <nav class="menu" id="menu" aria-label="Pages"></nav>
-          <p class="home-foot">by Liyuhan Zhou · CSUF ECS Showcase</p>
+          <p class="home-foot">by Liyuhan Zhou · University Honors Program, Cal State Fullerton</p>
         </div>
-        <!-- Only shown on wide screens -->
+        <!-- Above the menu on phones, beside it on PC -->
         <div class="home-art" aria-hidden="true">
           <figure class="polaroid"><img src="assets/screens/farm-dusk.jpg" alt=""></figure>
           <img class="float f1" src="assets/art/icons/cow.png" alt="">
@@ -56,19 +59,24 @@
             <div><b>36</b><span>real farm facts</span></div>
           </div>
           <article class="card">
-            <h3>Why I made it</h3>
-            <p>Many farming games are full of machinery and busy schedules. Evergarden is the opposite: a peaceful place where you build a garden from scratch and feel the small wins along the way. It draws on games like Stardew Valley and Minecraft.</p>
+            <h3>Introduction</h3>
+            <p>Virtual reality (VR) adds full-body immersion and hand interaction that PC, console, and mobile games lack, yet few VR games are built for relaxation. Evergarden is a calm VR farm, inspired by Stardew Valley and Minecraft, where players grow a garden from scratch at their own pace. The project draws on computer science, game design, and agricultural education.</p>
           </article>
         </div>
       </div>
       <div class="cols">
         <article class="card tilt-r">
-          <h3>The goal</h3>
-          <p>Let players act out the gestures of starting their own farm, as a short, meaningful break in a rural world with simple controls and a relaxing atmosphere.</p>
+          <h3>Goals</h3>
+          <ul class="list">
+            <li>Provide a low-pressure, relaxing escape</li>
+            <li>Use intuitive gestures to plant, water, and harvest</li>
+            <li>Encourage light physical activity</li>
+            <li>Lay groundwork for teaching K–12 students about farming</li>
+          </ul>
         </article>
         <article class="card">
-          <h3>Who it's for</h3>
-          <p>Younger learners, including K–12 students, and anyone who has never farmed before. Along the way it offers light exercise and real facts about how food grows.</p>
+          <h3>Results</h3>
+          <p>A playable Quest 3 farm: till, plant, water, and harvest carrots, tomatoes, and corn by hand, with a day/night clock, a voiced merchant NPC, and animals to pet and call home.</p>
         </article>
       </div>
     </div></div>
@@ -153,33 +161,63 @@
       </article>
       <div class="cols">
         <article class="card tilt-r">
-          <h3>How it's made</h3>
+          <h3>Methods</h3>
           <dl class="specs">
-            <div><dt>Headset</dt><dd>Meta Quest 3</dd></div>
-            <div><dt>Engine</dt><dd>Unity 2022.3 LTS, written in C#</dd></div>
-            <div><dt>Interaction</dt><dd>XR Interaction Toolkit: grab, pour, pluck and pet</dd></div>
-            <div><dt>Planning</dt><dd>Started from a game design document to shape ideas and the timeline</dd></div>
-            <div><dt>Testing</dt><dd>Weekly mentor reviews and progress reports</dd></div>
-            <div><dt>Assets</dt><dd>3D models from the Unity Asset Store, audio edited in Audacity</dd></div>
+            <div><dt>Planning</dt><dd>Planned features and timeline in a Game Design Doc (GDD)</dd></div>
+            <div><dt>Engine</dt><dd>Built in Unity 2022.3 LTS with C#</dd></div>
+            <div><dt>Headset</dt><dd>Targeted Meta Quest 3 for immersive play</dd></div>
+            <div><dt>Assets</dt><dd>3D models from the Unity Asset Store; audio edited in Audacity</dd></div>
+            <div><dt>Reviews</dt><dd>Bi-weekly mentor reviews guided each iteration</dd></div>
           </dl>
         </article>
-        <div>
-          <article class="card">
-            <h3>What I found</h3>
-            <p>VR can offer a real break from fast-paced life. By focusing on comfort and simple, physical interactions, Evergarden lets people try a lifestyle very different from their own and build a calm personal space.</p>
-          </article>
-          <article class="card tilt-r">
-            <h3>Thank you</h3>
-            <p>To the Department of Computer Science and the ECS Showcase organizers, and to my mentor Dr. Duy Ho for weekly advising and helpful suggestions.</p>
-          </article>
-        </div>
+        <article class="card">
+          <h3>Development process</h3>
+          <p>Each farm tile moves through five states. Each watered day grows the crop; harvesting returns the tile to Tilled.</p>
+          <ol class="states" aria-label="Tile states">
+            <li>Grass</li><li>Tilled</li><li>Planted</li><li>Watered</li><li class="end">Harvest</li>
+          </ol>
+          <pre class="code"><code>void OnCollisionEnter(Collision c) {
+  if (c.gameObject.CompareTag("Hoe"))
+    SetState(TileState.Tilled);
+}
+void OnParticleCollision(GameObject p) {
+  if (p.CompareTag("Water"))
+    SetState(TileState.Watered);
+}</code></pre>
+          <h4>Milestones</h4>
+          <dl class="milestones">
+            <div><dt>Jan</dt><dd>Project start</dd></div>
+            <div><dt>Feb</dt><dd>Farmland status</dd></div>
+            <div><dt>Apr</dt><dd>Crops grow</dd></div>
+            <div><dt>Aug</dt><dd>Merchant NPC</dd></div>
+            <div><dt>Oct</dt><dd>Animal behaviors</dd></div>
+          </dl>
+        </article>
       </div>
-      <h3 class="sub">What's next</h3>
+      <div class="cols">
+        <article class="card">
+          <h3>Reflection</h3>
+          <ul class="list">
+            <li>Blended computer science, game design, and education</li>
+            <li>Learned to design gesture-based VR interactions in Unity</li>
+            <li>Progress report meetings with my mentor for feedback and suggestions</li>
+          </ul>
+        </article>
+        <article class="card tilt-r">
+          <h3>Conclusions</h3>
+          <p>Evergarden shows that VR's physical interaction can make farming a calm, hands-on experience and a starting point for teaching K–12 students where food comes from.</p>
+        </article>
+      </div>
+      <h3 class="sub">Future directions</h3>
       <div class="cols three">
-        <article class="card"><h4>Neighbors</h4><p>Villagers to chat with and befriend over time.</p></article>
-        <article class="card"><h4>Weather</h4><p>Changing weather that transforms the scenery and sets off events.</p></article>
-        <article class="card"><h4>More to learn</h4><p>Tutorials, trivia and guides about farming.</p></article>
+        <article class="card"><h4>Friends and quests</h4><p>More NPCs with friendships and quests.</p></article>
+        <article class="card"><h4>Weather</h4><p>Weather that changes the scenery and triggers events.</p></article>
+        <article class="card"><h4>Festivals</h4><p>In-game festivals and an event calendar for different in-game days.</p></article>
       </div>
+      <article class="card">
+        <h3>Acknowledgments</h3>
+        <p>Thank you to the Department of Computer Science and the University Honors Program at Cal State Fullerton, and to my mentor Dr. Duy Ho for bi-weekly advising and helpful suggestions.</p>
+      </article>
     </div></div>
     <div class="grass" aria-hidden="true"></div>
   </section>
@@ -200,7 +238,7 @@
         <div>
           <article class="card tilt-r">
             <h3>Mentor</h3>
-            <p>Dr. Duy Ho<br>Department of Computer Science<br>Cal State Fullerton</p>
+            <p>Dr. Duy Ho<br>Department of Computer Science<br>Cal State Fullerton<br><a href="mailto:duyho@fullerton.edu">duyho@fullerton.edu</a></p>
           </article>
           <p class="fine credits">Farm icons and cat illustration generated with ChatGPT (OpenAI). Screenshots are from the game.</p>
         </div>
@@ -220,8 +258,8 @@
   </div>
 </div>
 
-<script src="js/data.js"></script>
-<script src="js/transitions.js"></script>
-<script src="js/app.js"></script>
+<script src="js/data.js?v=2"></script>
+<script src="js/transitions.js?v=2"></script>
+<script src="js/app.js?v=2"></script>
 </body>
 </html>

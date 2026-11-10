@@ -1,7 +1,7 @@
 # Evergarden poster website
 
 The site people reach by scanning the QR code on the Evergarden project poster
-(CSUF ECS Showcase). It's plain HTML, CSS and JavaScript with no build step.
+(CSUF University Honors Program). It's plain HTML, CSS and JavaScript with no build step.
 
 Live site: https://liyuhanlz.github.io/evergarden-website/
 
