@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=7">
+<link rel="stylesheet" href="css/styles.css?v=11">
 </head>
 <body>
 <div id="app">
@@ -28,11 +28,10 @@
             <p class="tagline">Growing calm in a virtual reality farm</p>
           </header>
           <nav class="menu" id="menu" aria-label="Pages"></nav>
-          <p class="home-foot">by Liyuhan Zhou · University Honors Program, Cal State Fullerton</p>
         </div>
         <!-- Above the menu on phones, beside it on PC -->
         <div class="home-art" aria-hidden="true">
-          <figure class="polaroid"><img src="assets/screens/farm-dusk.jpg" alt=""></figure>
+          <figure class="polaroid"><div class="ph" id="homePhoto"><img src="assets/screens/farm-dusk.jpg" alt=""><img class="off" alt=""></div></figure>
           <img class="float f1" src="assets/art/icons/cow.png" alt="">
           <img class="float f2" src="assets/art/icons/chicken.png" alt="">
           <img class="float f3" src="assets/art/icons/tomato.png" alt="">
@@ -41,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class="grass" aria-hidden="true"></div>
+    <footer class="grass"><small>by Liyuhan Zhou · University Honors Program, Cal State Fullerton</small></footer>
   </section>
 
   <!-- The game -->
@@ -80,7 +79,7 @@
         </article>
       </div>
     </div></div>
-    <div class="grass" aria-hidden="true"></div>
+    <footer class="grass"><small>by Liyuhan Zhou · University Honors Program, Cal State Fullerton</small></footer>
   </section>
 
   <!-- How it plays -->
@@ -108,7 +107,7 @@
         <li><b>End the day early.</b> Ring the farm bell. Once every animal is in the barn, the farm skips to morning.</li>
       </ul>
     </div></div>
-    <div class="grass" aria-hidden="true"></div>
+    <footer class="grass"><small>by Liyuhan Zhou · University Honors Program, Cal State Fullerton</small></footer>
   </section>
 
   <!-- Fun facts -->
@@ -129,12 +128,11 @@
         <p class="fact-extra"><span class="tag">Did you know?</span> <span id="fFact"></span></p>
         <div class="row">
           <button class="pill" id="nextFact" type="button">Another fact</button>
-          <button class="pill ghost" id="listen" type="button" aria-pressed="false">Listen</button>
         </div>
       </article>
       <p class="fine">Facts from Encyclopaedia Britannica. Harvest times from University of Minnesota Extension.</p>
     </div></div>
-    <div class="grass" aria-hidden="true"></div>
+    <footer class="grass"><small>by Liyuhan Zhou · University Honors Program, Cal State Fullerton</small></footer>
   </section>
 
   <!-- Gallery -->
@@ -145,7 +143,7 @@
       <p class="lead">Around the farm, day and night. Tap a picture to see it bigger.</p>
       <div class="gallery" id="gallery"></div>
     </div></div>
-    <div class="grass" aria-hidden="true"></div>
+    <footer class="grass"><small>by Liyuhan Zhou · University Honors Program, Cal State Fullerton</small></footer>
   </section>
 
   <!-- Behind the build -->
@@ -219,7 +217,7 @@ void OnParticleCollision(GameObject p) {
         <p>Thank you to the Department of Computer Science and the University Honors Program at Cal State Fullerton, and to my mentor Dr. Duy Ho for bi-weekly advising and helpful suggestions.</p>
       </article>
     </div></div>
-    <div class="grass" aria-hidden="true"></div>
+    <footer class="grass"><small>by Liyuhan Zhou · University Honors Program, Cal State Fullerton</small></footer>
   </section>
 
   <!-- Meet the maker -->
@@ -244,7 +242,7 @@ void OnParticleCollision(GameObject p) {
         </div>
       </div>
     </div></div>
-    <div class="grass" aria-hidden="true"></div>
+    <footer class="grass"><small>by Liyuhan Zhou · University Honors Program, Cal State Fullerton</small></footer>
   </section>
 
   <!-- References -->
@@ -255,7 +253,7 @@ void OnParticleCollision(GameObject p) {
       <p class="lead">Sources that helped with the development of the project.</p>
       <div id="refs"></div>
     </div></div>
-    <div class="grass" aria-hidden="true"></div>
+    <footer class="grass"><small>by Liyuhan Zhou · University Honors Program, Cal State Fullerton</small></footer>
   </section>
 
 </div>
@@ -269,8 +267,8 @@ void OnParticleCollision(GameObject p) {
   </div>
 </div>
 
-<script src="js/data.js?v=7"></script>
-<script src="js/transitions.js?v=7"></script>
-<script src="js/app.js?v=7"></script>
+<script src="js/data.js?v=11"></script>
+<script src="js/transitions.js?v=11"></script>
+<script src="js/app.js?v=11"></script>
 </body>
 </html>

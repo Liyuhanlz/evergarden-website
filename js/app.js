@@ -23,6 +23,33 @@ function home() {
        <span class="mi-face"><img src="${ICONS[p.icon]}" alt="">${p.label}</span></a>`).join("");
 
   document.querySelectorAll("img[data-icon]").forEach((img) => { img.src = ICONS[img.dataset.icon]; });
+  homePhoto();
+}
+
+// Home photo: a random gallery picture, gently swapped for another every few seconds
+function homePhoto() {
+  const imgs = document.querySelectorAll("#homePhoto img");
+  // Shuffle the gallery so every picture shows once before any repeats
+  const order = SHOTS.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  let pos = 0, front = 0;
+  const src = (k) => `assets/screens/${SHOTS[order[k % order.length]][0]}.jpg`;
+  const swap = () => {
+    const next = imgs[1 - front];
+    next.onload = () => {
+      next.classList.remove("off");
+      imgs[front].classList.add("off");
+      front = 1 - front;
+    };
+    next.src = src(++pos);
+  };
+  // First picture appears straight away, with no fade
+  imgs[0].src = src(0);
+  if (reduceMotion) return;
+  setInterval(() => { if (current === "home" && !document.hidden) swap(); }, 6000);
 }
 
 function popInMenu(delay = 0) {
@@ -103,21 +130,13 @@ function play() {
 //  Fun facts: the magnifying-glass page for each crop
 // ---------------------------------------------------------------------
 function facts() {
-  const chips = $("#chips"), listen = $("#listen");
-  const synth = window.speechSynthesis;
+  const chips = $("#chips");
   let crop = CROPS[0], fact = 0;
 
   chips.innerHTML = CROPS.map((c) =>
     `<button type="button" class="chip" role="tab" data-id="${c.id}" aria-selected="false"><img src="assets/art/icons/${c.icon}.png" alt="">${c.name}</button>`).join("");
 
-  const stop = () => {
-    if (synth) synth.cancel();
-    listen.setAttribute("aria-pressed", "false");
-    listen.textContent = "Listen";
-  };
-
   function render() {
-    stop();
     $("#fName").textContent = crop.name;
     $("#fIcon").src = `assets/art/icons/${crop.icon}.png`;
     $("#fAbout").textContent = crop.about;
@@ -139,18 +158,6 @@ function facts() {
     render();
   });
   $("#nextFact").addEventListener("click", () => { fact = (fact + 1) % crop.facts.length; render(); });
-
-  if (!synth) { listen.hidden = true; }
-  listen.addEventListener("click", () => {
-    if (listen.getAttribute("aria-pressed") === "true") { stop(); return; }
-    const u = new SpeechSynthesisUtterance(`${crop.name}. ${crop.about} ${crop.facts[fact]}`);
-    u.rate = 0.92;
-    u.onend = u.onerror = stop;
-    synth.cancel();
-    synth.speak(u);
-    listen.setAttribute("aria-pressed", "true");
-    listen.textContent = "Stop";
-  });
 
   render();
 }

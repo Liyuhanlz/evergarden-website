@@ -66,7 +66,10 @@ img { display: block; max-width: 100%; }
   background: var(--leaf);
   clip-path: polygon(0 30%, 8% 0, 16% 35%, 25% 5%, 34% 30%, 45% 0, 55% 32%, 66% 4%, 76% 30%, 86% 0, 94% 28%, 100% 6%, 100% 100%, 0 100%);
   pointer-events: none;
+  display: flex; align-items: flex-end; justify-content: center;
 }
+/* Copyright footnote sitting in the solid lower part of the grass */
+.grass small { font-size: min(11px, 3.1vw); white-space: nowrap; line-height: 1; padding-bottom: 8px; color: var(--ink); opacity: .85; letter-spacing: .02em; }
 .clouds { position: absolute; left: 0; right: 0; top: 0; height: 160px; pointer-events: none; }
 .clouds i { position: absolute; background: #fff; border-radius: 99px; animation: drift linear infinite; }
 .clouds i:nth-child(1) { top: 36px; width: 60px; height: 20px; animation-duration: 18s; }
@@ -269,6 +272,10 @@ img { display: block; max-width: 100%; }
   box-shadow: 0 10px 28px rgba(47, 74, 43, .2); transform: rotate(3deg);
 }
 .polaroid img { width: 100%; height: 100%; object-fit: cover; border-radius: 3px; }
+/* Two stacked photos so a new gallery picture can fade in over the old one */
+.polaroid .ph { position: relative; width: 100%; height: 100%; }
+.polaroid .ph img { position: absolute; inset: 0; transition: opacity 1.2s ease; }
+.polaroid .ph img.off { opacity: 0; }
 .float { position: absolute; width: 17%; animation: bob 3s ease-in-out infinite; filter: drop-shadow(0 6px 8px rgba(47, 74, 43, .18)); }
 .f1 { left: -1%; bottom: 0; width: 22%; }
 .f2 { right: 0; bottom: -2%; width: 18%; animation-delay: -1.2s; }
@@ -285,6 +292,7 @@ img { display: block; max-width: 100%; }
   .wrap { max-width: 1120px; margin: 0 auto; }
   .wrap.narrow { max-width: 860px; }
   .grass { height: 72px; }
+  .grass small { font-size: 14px; padding-bottom: 14px; }
   .clouds { height: 260px; }
   .clouds i:nth-child(1) { top: 50px; width: 110px; height: 34px; }
   .clouds i:nth-child(2) { top: 170px; width: 74px; height: 24px; }
