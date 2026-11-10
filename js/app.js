@@ -19,8 +19,8 @@ function home() {
   // Staggered left offsets; on phones the buttons also stretch to the right edge (see .mi in the CSS)
   const offsets = [0, 22, 8, 30, 4, 18, 12];
   $("#menu").innerHTML = PAGES.map((p, i) =>
-    `<a class="mi" href="#/${p.route}" style="background:${p.color};--off:${offsets[i % offsets.length]}px;--tilt:${i % 2 ? 3 : -3}deg">
-       <img src="${ICONS[p.icon]}" alt="">${p.label}</a>`).join("");
+    `<a class="mi" href="#/${p.route}" style="--bg:${p.color};--off:${offsets[i % offsets.length]}px;--tilt:${i % 2 ? 3 : -3}deg">
+       <span class="mi-face"><img src="${ICONS[p.icon]}" alt="">${p.label}</span></a>`).join("");
 
   document.querySelectorAll("img[data-icon]").forEach((img) => { img.src = ICONS[img.dataset.icon]; });
 }
