@@ -286,8 +286,8 @@ img { display: block; max-width: 100%; }
 .polaroid img { width: 100%; height: 100%; object-fit: cover; border-radius: 3px; }
 /* Two stacked photos so a new gallery picture can fade in over the old one */
 .polaroid .ph { position: relative; width: 100%; height: 100%; }
-.polaroid .ph img { position: absolute; inset: 0; transition: opacity 1.2s ease; }
-.polaroid .ph img.off { opacity: 0; }
+.polaroid .ph > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px; transition: opacity 1.2s ease; }
+.polaroid .ph > .off { opacity: 0; }
 .float { position: absolute; width: 17%; animation: bob 3s ease-in-out infinite; filter: drop-shadow(0 6px 8px rgba(47, 74, 43, .18)); }
 .f1 { left: -1%; bottom: 0; width: 22%; }
 .f2 { right: 0; bottom: -2%; width: 18%; animation-delay: -1.2s; }

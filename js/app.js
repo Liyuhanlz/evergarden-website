@@ -6,6 +6,12 @@ const T = window.EG_TRANSITIONS;
 const $ = (s, root = document) => root.querySelector(s);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// Everything in the Gallery, clips first: used by the Gallery page and the home photo
+const GALLERY = [
+  ...CLIPS.map(([n, c]) => ({ video: `assets/clips/clip-${n}.mp4`, poster: `assets/clips/clip-${n}.jpg`, cap: c })),
+  ...SHOTS.map(([f, c]) => ({ src: `assets/screens/${f}.jpg`, cap: c })),
+];
+
 // ---------------------------------------------------------------------
 //  Home: wobbly title letters and the slanted menu
 // ---------------------------------------------------------------------
@@ -26,30 +32,64 @@ function home() {
   homePhoto();
 }
 
-// Home photo: a random gallery picture, gently swapped for another every few seconds
+// Home photo: shows only what's in the Gallery (clips and screenshots), in shuffled order,
+// fading to the next one every few seconds. Adding to CLIPS or SHOTS updates both places.
 function homePhoto() {
-  const imgs = document.querySelectorAll("#homePhoto img");
-  // Shuffle the gallery so every picture shows once before any repeats
-  const order = SHOTS.map((_, i) => i);
+  const box = $("#homePhoto");
+  const order = GALLERY.map((_, i) => i);
   for (let i = order.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [order[i], order[j]] = [order[j], order[i]];
   }
-  let pos = 0, front = 0;
-  const src = (k) => `assets/screens/${SHOTS[order[k % order.length]][0]}.jpg`;
-  const swap = () => {
-    const next = imgs[1 - front];
-    next.onload = () => {
-      next.classList.remove("off");
-      imgs[front].classList.add("off");
-      front = 1 - front;
-    };
-    next.src = src(++pos);
+  let pos = 0, cur = null;
+
+  // Build the element for one gallery item: a looping clip, or a still picture.
+  // With reduced motion a clip shows its still poster instead of playing.
+  const make = (it) => {
+    let el;
+    if (it.video && !reduceMotion) {
+      el = document.createElement("video");
+      Object.assign(el, { muted: true, loop: true, playsInline: true, autoplay: true, poster: it.poster, src: it.video });
+      el.setAttribute("muted", "");
+    } else {
+      el = document.createElement("img");
+      el.src = it.video ? it.poster : it.src;
+      el.alt = "";
+    }
+    return el;
   };
-  // First picture appears straight away, with no fade
-  imgs[0].src = src(0);
+
+  let pending = false;
+  const showNext = (fade) => {
+    if (pending) return;   // still waiting for the last one to load
+    const el = make(GALLERY[order[pos++ % order.length]]);
+    if (fade) el.classList.add("off");
+    box.appendChild(el);
+    pending = fade;
+    el.addEventListener("error", () => { pending = false; if (el !== cur) el.remove(); }, { once: true });
+    const reveal = () => {
+      pending = false;
+      el.classList.remove("off");
+      const old = cur;
+      cur = el;
+      if (old && old !== el) {
+        old.classList.add("off");
+        setTimeout(() => old.remove(), 1300);   // after the 1.2s fade
+      }
+    };
+    if (!fade) { reveal(); return; }
+    if (el.tagName === "VIDEO") el.addEventListener("loadeddata", reveal, { once: true });
+    else el.onload = reveal;
+  };
+
+  box.replaceChildren();
+  showNext(false);
   if (reduceMotion) return;
-  setInterval(() => { if (current === "home" && !document.hidden) swap(); }, 6000);
+  setInterval(() => {
+    const onHome = current === "home" && !document.hidden;
+    if (cur && cur.tagName === "VIDEO") onHome ? cur.play().catch(() => {}) : cur.pause();
+    if (onHome) showNext(true);
+  }, 6000);
 }
 
 function popInMenu(delay = 0) {
@@ -167,11 +207,7 @@ function facts() {
 // ---------------------------------------------------------------------
 function gallery() {
   const lb = $("#lightbox"), img = $("#lbImg"), vid = $("#lbVid"), cap = $("#lbCap");
-  // One list for the viewer: clips first, then screenshots
-  const items = [
-    ...CLIPS.map(([n, c]) => ({ video: `assets/clips/clip-${n}.mp4`, poster: `assets/clips/clip-${n}.jpg`, cap: c })),
-    ...SHOTS.map(([f, c]) => ({ src: `assets/screens/${f}.jpg`, cap: c })),
-  ];
+  const items = GALLERY;
   const tilt = (i) => [-2, 1.5, -1, 2][i % 4];
 
   $("#clips").innerHTML = items.filter((it) => it.video).map((it, i) =>
