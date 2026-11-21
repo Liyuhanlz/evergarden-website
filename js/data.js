@@ -146,6 +146,32 @@ const CROPS = [
     facts: ["Carrots aren't only orange. They can be white, yellow or purple too!", "People probably started farming carrots in Central Asia about 1,000 years ago!", "Carrots are full of carotene, which your body turns into vitamin A!", "Wild carrots have a fancy name: Queen Anne's lace!"] },
 ];
 
+// Short gameplay clips (assets/clips/clip-NN.mp4 with a matching .jpg poster), in play order
+const CLIPS = [
+  ["01", "Learning to walk in the tutorial"],
+  ["02", "Grabbing the door and pulling it open"],
+  ["03", "The farmer welcomes you to the farm"],
+  ["04", "Opening the merchant's seed shop"],
+  ["05", "Petting a sheep"],
+  ["06", "Collecting eggs at the chicken coop"],
+  ["07", "Picking the hoe from the backpack"],
+  ["08", "Tilling grass into soil with the hoe"],
+  ["09", "Tilling and planting seeds"],
+  ["10", "Watering the sprouts"],
+  ["11", "Bringing a cow into the barn for milking"],
+  ["12", "Milking in rhythm: squeeze on the beat"],
+  ["13", "Pulling the bell rope to call the animals"],
+  ["14", "The animals head back to the barn"],
+  ["15", "Petting the farm cat"],
+  ["16", "Everyone's in, so the farm sleeps until morning"],
+  ["17", "Harvesting cauliflower"],
+  ["18", "Picking up the magnifying glass"],
+  ["19", "Picking a ripe tomato by hand"],
+  ["20", "A tomato plant full of fruit"],
+  ["21", "Reading a tomato's growth and fun facts"],
+  ["22", "Choosing smooth or snap turning in Settings"],
+];
+
 const SHOTS = [
   ["farm-day", "The farm plots at midday"],
   ["corn-dusk", "Corn ready to pick at dusk"],
@@ -159,5 +185,5 @@ const SHOTS = [
   ["farmhouse-night", "The farmhouse at night"],
 ];
 
-return { MAKER, ABSTRACT, ICONS, PAGES, REFERENCES, STEPS, HANDS, CROPS, SHOTS };
+return { MAKER, ABSTRACT, ICONS, PAGES, REFERENCES, STEPS, HANDS, CROPS, CLIPS, SHOTS };
 })();

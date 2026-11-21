@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=12">
+<link rel="stylesheet" href="css/styles.css?v=13">
 </head>
 <body>
 <div id="app">
@@ -141,7 +141,10 @@
     <div class="scroll"><div class="wrap">
       <div class="page-head"><a class="back" href="#/">Back</a></div>
       <h2 class="banner"><img src="" data-icon="barn" alt="">Gallery</h2>
-      <p class="lead">Around the farm, day and night. Tap a picture to see it bigger.</p>
+      <p class="lead">Clips and pictures from around the farm. Tap one to see it bigger.</p>
+      <h3 class="sub">Gameplay clips</h3>
+      <div class="gallery clips" id="clips"></div>
+      <h3 class="sub">Screenshots</h3>
       <div class="gallery" id="gallery"></div>
     </div></div>
     <footer class="grass"><small>by Liyuhan Zhou · University Honors Program, Cal State Fullerton</small></footer>
@@ -220,17 +223,17 @@
 
 </div>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot" hidden>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery viewer" hidden>
   <button class="round" id="lbClose" type="button" aria-label="Close">&times;</button>
-  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <figure><img id="lbImg" alt=""><video id="lbVid" muted loop playsinline hidden></video><figcaption id="lbCap"></figcaption></figure>
   <div class="lb-nav">
     <button class="round" id="lbPrev" type="button" aria-label="Previous">&lsaquo;</button>
     <button class="round" id="lbNext" type="button" aria-label="Next">&rsaquo;</button>
   </div>
 </div>
 
-<script src="js/data.js?v=12"></script>
-<script src="js/transitions.js?v=12"></script>
-<script src="js/app.js?v=12"></script>
+<script src="js/data.js?v=13"></script>
+<script src="js/transitions.js?v=13"></script>
+<script src="js/app.js?v=13"></script>
 </body>
 </html>

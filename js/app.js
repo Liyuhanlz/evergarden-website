@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 
-const { MAKER, ABSTRACT, ICONS, PAGES, REFERENCES, STEPS, HANDS, CROPS, SHOTS } = window.EG;
+const { MAKER, ABSTRACT, ICONS, PAGES, REFERENCES, STEPS, HANDS, CROPS, CLIPS, SHOTS } = window.EG;
 const T = window.EG_TRANSITIONS;
 const $ = (s, root = document) => root.querySelector(s);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -166,19 +166,51 @@ function facts() {
 //  Gallery grid and lightbox
 // ---------------------------------------------------------------------
 function gallery() {
-  const grid = $("#gallery"), lb = $("#lightbox"), img = $("#lbImg"), cap = $("#lbCap");
-  grid.innerHTML = SHOTS.map(([f, c], i) =>
-    `<button type="button" class="photo" data-i="${i}" style="--tilt:${[-2, 1.5, -1, 2][i % 4]}deg" aria-label="Open: ${c}">
-       <img src="assets/screens/${f}.jpg" alt="${c}" loading="lazy"><span>${c}</span></button>`).join("");
+  const lb = $("#lightbox"), img = $("#lbImg"), vid = $("#lbVid"), cap = $("#lbCap");
+  // One list for the viewer: clips first, then screenshots
+  const items = [
+    ...CLIPS.map(([n, c]) => ({ video: `assets/clips/clip-${n}.mp4`, poster: `assets/clips/clip-${n}.jpg`, cap: c })),
+    ...SHOTS.map(([f, c]) => ({ src: `assets/screens/${f}.jpg`, cap: c })),
+  ];
+  const tilt = (i) => [-2, 1.5, -1, 2][i % 4];
+
+  $("#clips").innerHTML = items.filter((it) => it.video).map((it, i) =>
+    `<button type="button" class="photo clip" data-i="${i}" style="--tilt:${tilt(i)}deg" aria-label="Play bigger: ${it.cap}">
+       <video src="${it.video}" poster="${it.poster}" muted loop playsinline preload="none" aria-hidden="true"></video><span>${it.cap}</span></button>`).join("");
+  $("#gallery").innerHTML = items.map((it, i) => it.video ? "" :
+    `<button type="button" class="photo" data-i="${i}" style="--tilt:${tilt(i)}deg" aria-label="Open: ${it.cap}">
+       <img src="${it.src}" alt="${it.cap}" loading="lazy"><span>${it.cap}</span></button>`).join("");
+
+  // Clips play like GIFs, but only while they're on screen (and never with reduced motion)
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      const v = e.target;
+      if (e.isIntersecting) v.play().catch(() => {}); else v.pause();
+    }), { threshold: 0.4 });
+    document.querySelectorAll("#clips video").forEach((v) => io.observe(v));
+  }
 
   let idx = 0, opener = null;
   const show = (i) => {
-    idx = (i + SHOTS.length) % SHOTS.length;
-    img.src = `assets/screens/${SHOTS[idx][0]}.jpg`;
-    img.alt = cap.textContent = SHOTS[idx][1];
+    idx = (i + items.length) % items.length;
+    const it = items[idx];
+    cap.textContent = it.cap;
+    if (it.video) {
+      img.hidden = true; vid.hidden = false;
+      vid.poster = it.poster; vid.src = it.video;
+      vid.setAttribute("aria-label", it.cap);
+      vid.play().catch(() => {});
+    } else {
+      vid.pause(); vid.removeAttribute("src"); vid.load(); vid.hidden = true;
+      img.hidden = false; img.src = it.src; img.alt = it.cap;
+    }
   };
-  const close = () => { lb.hidden = true; if (opener) opener.focus(); };
-  grid.addEventListener("click", (e) => {
+  const close = () => {
+    lb.hidden = true;
+    vid.pause();
+    if (opener) opener.focus();
+  };
+  document.querySelector('[data-route="gallery"]').addEventListener("click", (e) => {
     const b = e.target.closest(".photo");
     if (!b) return;
     opener = b; show(+b.dataset.i); lb.hidden = false; $("#lbClose").focus();
